@@ -433,7 +433,11 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
+		// first check if string is null
+		if (string == null) {
+			return false;
+		}
+		
 		return false;
 	}
 
