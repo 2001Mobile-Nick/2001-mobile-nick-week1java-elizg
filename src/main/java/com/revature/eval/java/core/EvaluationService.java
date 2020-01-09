@@ -15,7 +15,7 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 		char[] reversed = new char[string.length()];
-		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
+		for (int i = reversed.length - 1, j = 0; i >= 0; i--, j++) {
 			reversed[j] = string.charAt(i);
 		}
 		return new String(reversed);
@@ -29,9 +29,15 @@ public class EvaluationService {
 	 * @param phrase
 	 * @return
 	 */
+	// create new string
+	// change to uppercase
+	// splice at space char 
+	// charAt(0) for each and push to new String
+	// return new string
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
 		return null;
+
 	}
 
 	/**
@@ -84,18 +90,27 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if ((sideOne == sideTwo) && (sideOne == sideThree)) {
+				return true;
+			} else {	
+				return false;
+			}
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if ((sideOne == sideTwo) || (sideOne == sideThree) || (sideTwo == sideThree)) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
+			if ((sideOne != sideTwo) && (sideOne != sideThree) && (sideTwo != sideThree)) {
+				return true;
+			} else {
 			return false;
+			}
 		}
 
 	}
@@ -115,8 +130,14 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	// string to lowercase
+	// create a hash map with key/char and value/points
+	// create a counter
+	// for each char in string get value from hash map, add to counter
+	// return counter
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
+
 		return 0;
 	}
 
@@ -165,6 +186,11 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	// splice at space
+	// create a hash map key/string and value/integer
+	// loop over the words
+	// search for that word in hash map, increment the counter
+	// return the hash map
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
 		return null;
@@ -205,6 +231,7 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 * 
 	 */
+	// instanceOf to check, then do casting
 	static class BinarySearch<T> {
 		private List<T> sortedList;
 
@@ -436,8 +463,11 @@ public class EvaluationService {
 		// first check if string is null
 		if (string == null) {
 			return false;
+			// then check if string has at least 26 characters
+		} else if (string.length() < 26) {
+			return false;
 		}
-		
+
 		return false;
 	}
 
