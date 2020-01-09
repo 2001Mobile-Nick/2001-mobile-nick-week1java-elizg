@@ -466,6 +466,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	// can get the index of alphabet by subtracting alpha chars bc each ascii char has a value so if you subtract the actual letter it gives you the position(index) in the alphabet
 	public boolean isPangram(String string) {
 		// first check if string is null
 		if (string == null) {
