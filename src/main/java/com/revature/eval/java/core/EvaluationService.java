@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -179,9 +180,23 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
+	// remove all non-digits
+	// remove index 0 if no of digits is > 10
+	// Character is a systems library
+	// character.isDigit
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String phoneNumber = "";
+		for (int i = 0; i < string.length(); i++ ) {
+			if (Character.isDigit(string.charAt(i))) {
+				phoneNumber += Character.toString(string.charAt(i));
+			}
+		}
+		
+		if (phoneNumber.length() == 11) 
+			phoneNumber = phoneNumber.substring(1);
+		if (phoneNumber.length() != 10)
+			throw new IllegalArgumentException();
+		return phoneNumber;
 	}
 
 	/**
@@ -199,8 +214,25 @@ public class EvaluationService {
 	// search for that word in hash map, increment the counter
 	// return the hash map
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		Map<String, Integer> wc = new HashMap<>();
+		
+		String[] phraseSplit = string.split(" ");
+
+		for(int i = 0; i < phraseSplit.length; i++) {
+			if (wc.containsKey(phraseSplit[i])) {
+				// we saw the word earlier
+				// retrieve the number of times we saw and increment and put it back
+				Integer count = wc.get(phraseSplit[i]);
+				wc.put(phraseSplit[i], count + 1);
+			} else {
+				// first time , we saw the word
+				// initialize the number of times we saw the word to 1
+				wc.put(phraseSplit[i], 1);
+			}
+				
+		}
+		
+		return wc;
 	}
 
 	/**
@@ -279,10 +311,15 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
+	
+
+	
+	public String toPigLatin(String s) {
+			// TODO
 		return null;
-	}
+		} 
+		  
+
 
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
@@ -299,8 +336,8 @@ public class EvaluationService {
 	 * @param input
 	 * @return
 	 */
-	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
+	public boolean isArmstrongNumber(int n) {
+		// TODO
 		return false;
 	}
 
