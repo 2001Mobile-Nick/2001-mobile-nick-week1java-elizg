@@ -31,12 +31,19 @@ public class EvaluationService {
 	 */
 	// create new string
 	// change to uppercase
-	// splice at space char 
+	// split at space char 
 	// charAt(0) for each and push to new String
 	// return new string
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		String[] phraseSplit = phrase.split(" ");
+		String acronym = "";
+		
+		for(int i = 0; i < phraseSplit.length; i++) {
+			acronym += phraseSplit[i].charAt(0);
+		}
+		
+		return acronym.toUpperCase();
 
 	}
 
@@ -90,7 +97,7 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			if ((sideOne == sideTwo) && (sideOne == sideThree)) {
+			if (sideOne == sideTwo && sideOne == sideThree) {
 				return true;
 			} else {	
 				return false;
@@ -98,7 +105,7 @@ public class EvaluationService {
 		}
 
 		public boolean isIsosceles() {
-			if ((sideOne == sideTwo) || (sideOne == sideThree) || (sideTwo == sideThree)) {
+			if (sideOne == sideTwo || sideOne == sideThree || sideTwo == sideThree) {
 				return true;
 			} else {
 				return false;
@@ -106,7 +113,7 @@ public class EvaluationService {
 		}
 
 		public boolean isScalene() {
-			if ((sideOne != sideTwo) && (sideOne != sideThree) && (sideTwo != sideThree)) {
+			if (sideOne != sideTwo && sideOne != sideThree && sideTwo != sideThree) {
 				return true;
 			} else {
 			return false;
@@ -186,7 +193,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	// splice at space
+	// split at space
 	// create a hash map key/string and value/integer
 	// loop over the words
 	// search for that word in hash map, increment the counter
