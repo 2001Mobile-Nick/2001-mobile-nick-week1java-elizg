@@ -547,23 +547,9 @@ public class EvaluationService {
 	// can get the index of alphabet by subtracting alpha chars bc each ascii char
 	// has a value so if you subtract the actual letter it gives you the
 	// position(index) in the alphabet
-	public boolean isPangram(String string) {
-		String s = "The quick brown fox jumps over the lazy dog";
-		System.out.println("Is given String Pangram ? : " + isPangramString(s.toLowerCase()));
-		return false;
-	}
 
-	private static boolean isPangramString(String s) {
-		if (s.length() < 26)
-			return false;
-		else {
-			for (char ch = 'a'; ch <= 'z'; ch++) {
-				if (s.indexOf(ch) < 0) {
-					return false;
-				}
-			}
-		}
-		return true;
+	public boolean isPangram(String str) {
+		return false;
 	}
 
 	/**
