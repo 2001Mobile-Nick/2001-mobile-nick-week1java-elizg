@@ -454,28 +454,39 @@ public class EvaluationService {
 	}
 
 	public String toPigLatin(String s) {
+		String output = "";
 
-		// the index of the first vowel is stored
-		int len = s.length();
-		int index = -1; // havent seen a vowel
-		for (int i = 0; i < len; i++) // searching for vowel in string
-		{
-			if (isVowel(s.charAt(i))) {
-				index = i;
-				break;
+		for (String word : s.split(" ")) {
+			// the index of the first vowel is stored
+			if (output != "") {
+				output += " "; // add space
 			}
+			int len = word.length();
+			int index = -1; // havent seen a vowel
+			for (int i = 0; i < len; i++) // searching for vowel in string
+			{
+				if (isVowel(word.charAt(i))) {
+					// Added a condition for the edge case
+					if (word.charAt(i) == 'u' && word.charAt(i + 1) == 'i') {
+						continue;
+					}
+					index = i;
+					break;
+				}
+			}
+
+			// is vowel present
+			if (index == -1)
+				return "-1";
+
+			// Take all characters from index
+			// append all characters which are before index
+			// append "ay"
+			output += word.substring(index) + word.substring(0, index) + "ay";
 		}
 
-		// is vowel present
-		if (index == -1)
-			return "-1";
-
-		// Take all characters from index
-		// append all characters which are before index
-		// append "ay"
-		return s.substring(index) + s.substring(0, index) + "ay";
+		return output;
 	}
-
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
 	 * raised to the power of the number of digits.
@@ -527,9 +538,23 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> primeFactors = new ArrayList<>();
+		long n = l; // copy to a different variable as we will be modifying it
+
+		// Base case
+		if (l == 2) {
+			primeFactors.add(2L);
+		}
+
+		for (int i = 2; i <= Math.sqrt(l); i++) {
+			while (n % i == 0) {
+				primeFactors.add((long)i);
+				n /= i;
+			}
+		}
+		return primeFactors;
 	}
+	
 
 	/**
 	 * 11. Create an implementation of the rotational cipher, also sometimes called
@@ -585,8 +610,28 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		if (n <= 0) {
+			throw new IllegalArgumentException();
+		}
+		int primeNumber = 1; // Initialize with 1
+		while (n > 0) {
+			for (int i = primeNumber + 1; ;i++) {
+				int j = 2;
+				for (; j <= Math.sqrt(i); j++) {
+					if (i % j == 0) {
+						break;
+					}
+				}
+
+				if ( j > Math.sqrt(i)) {
+					// found the prime number
+					n--;
+					primeNumber = i;
+					break;
+				}
+			}
+		}
+		return primeNumber;
 	}
 
 	/**
@@ -674,6 +719,7 @@ public class EvaluationService {
 		else
 			return false;
 	}
+	
 
 	/**
 	 * 16. Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan
@@ -692,8 +738,19 @@ public class EvaluationService {
 	// has a value so if you subtract the actual letter it gives you the
 	// position(index) in the alphabet
 
-	public boolean isPangram(String str) {
-		return false;
+	public boolean isPangram(String string) {
+		boolean[] occurrence = new boolean[26];
+		str = str.replaceAll("[^A-Za-z]", "");
+		for (char c : str.toCharArray()) {
+			occurrence[Character.toLowerCase(c) - 'a'] = true; //set to true
+		}
+
+		for (boolean flag : occurrence) {
+			if (!flag) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -723,8 +780,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		Set<Integer> multiplies = new HashSet<>();
+		for (int multiplier : set) {
+			for (int i = 1; i * multiplier < n; i++) {
+				multiplies.add(multiplier * i);
+			}
+		}
+
+		int sum = 0;
+		for (int i : multiplies) {
+			sum += i;
+		}
+		return sum;
 	}
 
 	/**
