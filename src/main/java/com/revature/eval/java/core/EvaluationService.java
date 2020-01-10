@@ -32,18 +32,18 @@ public class EvaluationService {
 	 */
 	// create new string
 	// change to uppercase
-	// split at space char 
+	// split at space char
 	// charAt(0) for each and push to new String
 	// return new string
 	public String acronym(String phrase) {
-		
+
 		String[] phraseSplit = phrase.split(" ");
 		String acronym = "";
-		
-		for(int i = 0; i < phraseSplit.length; i++) {
+
+		for (int i = 0; i < phraseSplit.length; i++) {
 			acronym += phraseSplit[i].charAt(0);
 		}
-		
+
 		return acronym.toUpperCase();
 
 	}
@@ -100,7 +100,7 @@ public class EvaluationService {
 		public boolean isEquilateral() {
 			if (sideOne == sideTwo && sideOne == sideThree) {
 				return true;
-			} else {	
+			} else {
 				return false;
 			}
 		}
@@ -117,7 +117,7 @@ public class EvaluationService {
 			if (sideOne != sideTwo && sideOne != sideThree && sideTwo != sideThree) {
 				return true;
 			} else {
-			return false;
+				return false;
 			}
 		}
 
@@ -186,13 +186,13 @@ public class EvaluationService {
 	// character.isDigit
 	public String cleanPhoneNumber(String string) {
 		String phoneNumber = "";
-		for (int i = 0; i < string.length(); i++ ) {
+		for (int i = 0; i < string.length(); i++) {
 			if (Character.isDigit(string.charAt(i))) {
 				phoneNumber += Character.toString(string.charAt(i));
 			}
 		}
-		
-		if (phoneNumber.length() == 11) 
+
+		if (phoneNumber.length() == 11)
 			phoneNumber = phoneNumber.substring(1);
 		if (phoneNumber.length() != 10)
 			throw new IllegalArgumentException();
@@ -215,10 +215,10 @@ public class EvaluationService {
 	// return the hash map
 	public Map<String, Integer> wordCount(String string) {
 		Map<String, Integer> wc = new HashMap<>();
-		
+
 		String[] phraseSplit = string.split(" ");
 
-		for(int i = 0; i < phraseSplit.length; i++) {
+		for (int i = 0; i < phraseSplit.length; i++) {
 			if (wc.containsKey(phraseSplit[i])) {
 				// we saw the word earlier
 				// retrieve the number of times we saw and increment and put it back
@@ -229,9 +229,9 @@ public class EvaluationService {
 				// initialize the number of times we saw the word to 1
 				wc.put(phraseSplit[i], 1);
 			}
-				
+
 		}
-		
+
 		return wc;
 	}
 
@@ -311,15 +311,35 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	
 
-	
+	static boolean isVowel(char c) {
+		// checking if character is vowel
+		return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'a' || c == 'e' || c == 'i' || c == 'o'
+				|| c == 'u');
+	}
+
 	public String toPigLatin(String s) {
-			// TODO
-		return null;
-		} 
-		  
 
+		// the index of the first vowel is stored
+		int len = s.length();
+		int index = -1; // havent seen a vowel
+		for (int i = 0; i < len; i++) // searching for vowel in string
+		{
+			if (isVowel(s.charAt(i))) {
+				index = i;
+				break;
+			}
+		}
+
+		// is vowel present
+		if (index == -1)
+			return "-1";
+
+		// Take all characters from index
+		// append all characters which are before index
+		// append "ay"
+		return s.substring(index) + s.substring(0, index) + "ay";
+	}
 
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
@@ -336,9 +356,30 @@ public class EvaluationService {
 	 * @param input
 	 * @return
 	 */
-	public boolean isArmstrongNumber(int n) {
-		// TODO
-		return false;
+
+	
+	public boolean isArmstrongNumber(int num) {
+
+	    String number = String.valueOf(num);
+	    char[] numDigits = number.toCharArray();
+
+	    int sum = 0;
+	    // get no of digits
+	    int power = numDigits.length;
+
+	    for (int i = 0; i < numDigits.length; i++) {
+	        // character to digit
+	        int digit = Character.digit(numDigits[i], 10);
+	        // digit to power
+	        sum = sum + (int) Math.pow(digit, power);
+	    }
+
+	    if (sum == num) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+
 	}
 
 	/**
@@ -503,17 +544,26 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	// can get the index of alphabet by subtracting alpha chars bc each ascii char has a value so if you subtract the actual letter it gives you the position(index) in the alphabet
+	// can get the index of alphabet by subtracting alpha chars bc each ascii char
+	// has a value so if you subtract the actual letter it gives you the
+	// position(index) in the alphabet
 	public boolean isPangram(String string) {
-		// first check if string is null
-		if (string == null) {
-			return false;
-			// then check if string has at least 26 characters
-		} else if (string.length() < 26) {
-			return false;
-		}
-
+		String s = "The quick brown fox jumps over the lazy dog";
+		System.out.println("Is given String Pangram ? : " + isPangramString(s.toLowerCase()));
 		return false;
+	}
+
+	private static boolean isPangramString(String s) {
+		if (s.length() < 26)
+			return false;
+		else {
+			for (char ch = 'a'; ch <= 'z'; ch++) {
+				if (s.indexOf(ch) < 0) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -583,10 +633,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
-	}
+
 
 	/**
 	 * 20. Parse and evaluate simple math word problems returning the answer as an
