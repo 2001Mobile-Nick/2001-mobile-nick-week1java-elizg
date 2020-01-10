@@ -604,7 +604,6 @@ public class EvaluationService {
 					output += c;
 				}
 			}
-			// TODO Write an implementation for this method declaration
 			return output;
 		}
 
@@ -622,7 +621,7 @@ public class EvaluationService {
 	 * @param i
 	 * @return
 	 */
-	public int calculateNthPrime(int i) {
+	public int calculateNthPrime(int n) {
 		if (n <= 0) {
 			throw new IllegalArgumentException();
 		}
