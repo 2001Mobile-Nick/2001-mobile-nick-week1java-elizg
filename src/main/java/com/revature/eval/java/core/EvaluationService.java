@@ -146,7 +146,7 @@ public class EvaluationService {
 		char[] token = string.toUpperCase().toCharArray();
 
 		for (char letters : token) {
-			switch (letter) {
+			switch (letters) {
 
 			case 'A':
 				points += 1;
