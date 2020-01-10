@@ -1,9 +1,12 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class EvaluationService {
 
@@ -141,113 +144,113 @@ public class EvaluationService {
 	// switch case
 	public int getScrabbleScore(String string) {
 
-	    int points = 0;
-	    char letter;
-		char[] token = string.toUpperCase().toCharArray();
+		int points = 0;
+		char letter;
+		char[] tokens = string.toUpperCase().toCharArray();
 
-		for (char letters : token) {
+		for (char letters : tokens) {
 			switch (letters) {
 
 			case 'A':
 				points += 1;
 				break;
-				
+
 			case 'B':
 				points += 3;
 				break;
-				
+
 			case 'C':
 				points += 3;
 				break;
-				
+
 			case 'D':
 				points += 2;
 				break;
-				
+
 			case 'E':
 				points += 1;
 				break;
-				
+
 			case 'F':
 				points += 4;
 				break;
-				
+
 			case 'G':
 				points += 2;
 				break;
-				
+
 			case 'H':
 				points += 4;
 				break;
-				
+
 			case 'I':
 				points += 1;
 				break;
-				
+
 			case 'J':
 				points += 8;
 				break;
-				
+
 			case 'K':
 				points += 5;
 				break;
-				
+
 			case 'L':
 				points += 1;
 				break;
-				
+
 			case 'M':
 				points += 3;
 				break;
-				
+
 			case 'N':
 				points += 1;
 				break;
-				
+
 			case 'O':
 				points += 1;
 				break;
-				
+
 			case 'P':
 				points += 3;
 				break;
-				
+
 			case 'Q':
 				points += 10;
 				break;
-				
+
 			case 'R':
 				points += 1;
 				break;
-				
+
 			case 'S':
 				points += 1;
 				break;
-				
+
 			case 'T':
 				points += 1;
 				break;
-				
+
 			case 'U':
 				points += 1;
 				break;
-				
+
 			case 'V':
 				points += 4;
 				break;
-				
+
 			case 'W':
 				points += 4;
 				break;
-				
+
 			case 'X':
 				points += 8;
 				break;
-				
+
 			case 'Y':
 				points += 4;
 				break;
-				
+
 			case 'Z':
 				points += 10;
 				break;
@@ -386,7 +389,7 @@ public class EvaluationService {
 			if (!(t instanceof Comparable)) {
 				throw new IllegalArgumentException("Can't compare");
 			}
-			
+
 			@SuppressWarnings("unchecked")
 			List<Comparable> list = (List<Comparable>) sortedList;
 			Comparable item = (Comparable) t;
@@ -402,16 +405,16 @@ public class EvaluationService {
 				if (compare == 0) {
 					return c;
 				}
-				
+
 				if (compare < 0) {
 					r = c - 1;
 				} else {
 					l = c + 1;
 				}
 			}
-			
+
 			return -1;
-			
+
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -487,6 +490,7 @@ public class EvaluationService {
 
 		return output;
 	}
+
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
 	 * raised to the power of the number of digits.
@@ -548,13 +552,12 @@ public class EvaluationService {
 
 		for (int i = 2; i <= Math.sqrt(l); i++) {
 			while (n % i == 0) {
-				primeFactors.add((long)i);
+				primeFactors.add((long) i);
 				n /= i;
 			}
 		}
 		return primeFactors;
 	}
-	
 
 	/**
 	 * 11. Create an implementation of the rotational cipher, also sometimes called
@@ -591,8 +594,18 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
+			String output = "";
+			for (Character c : string.toCharArray()) {
+				if (c >= 'a' && c <= 'z') {
+					output += (char) ('a' + ((c - 'a' + key) % 26));
+				} else if (c >= 'A' && c <= 'Z') {
+					output += (char) ('A' + ((c - 'A' + key) % 26));
+				} else {
+					output += c;
+				}
+			}
 			// TODO Write an implementation for this method declaration
-			return null;
+			return output;
 		}
 
 	}
@@ -615,7 +628,7 @@ public class EvaluationService {
 		}
 		int primeNumber = 1; // Initialize with 1
 		while (n > 0) {
-			for (int i = primeNumber + 1; ;i++) {
+			for (int i = primeNumber + 1;; i++) {
 				int j = 2;
 				for (; j <= Math.sqrt(i); j++) {
 					if (i % j == 0) {
@@ -623,7 +636,7 @@ public class EvaluationService {
 					}
 				}
 
-				if ( j > Math.sqrt(i)) {
+				if (j > Math.sqrt(i)) {
 					// found the prime number
 					n--;
 					primeNumber = i;
@@ -719,7 +732,6 @@ public class EvaluationService {
 		else
 			return false;
 	}
-	
 
 	/**
 	 * 16. Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan
@@ -742,7 +754,7 @@ public class EvaluationService {
 		boolean[] occurrence = new boolean[26];
 		str = str.replaceAll("[^A-Za-z]", "");
 		for (char c : str.toCharArray()) {
-			occurrence[Character.toLowerCase(c) - 'a'] = true; //set to true
+			occurrence[Character.toLowerCase(c) - 'a'] = true; // set to true
 		}
 
 		for (boolean flag : occurrence) {
@@ -861,8 +873,26 @@ public class EvaluationService {
 	// split string at spaces into array
 	//
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		string = string.replaceAll("\\?", "");
+		String[] tokens = string.split(" ");
+		int operand1 = Integer.parseInt(tokens[2]);
+		int operand2;
+		if (tokens[4].equals("by")) {
+			operand2 = Integer.parseInt(tokens[5]);
+		} else {
+			operand2 = Integer.parseInt(tokens[4]);
+		}
+
+
+		if (tokens[3].equals("plus")) {
+			return operand1 + operand2;
+		} else if (tokens[3].equals("minus")) {
+			return operand1 - operand2;
+		} else if (tokens[3].equals("multiplied")) {
+			return operand1 * operand2;
+		} else {
+			return operand1 / operand2;
+		}
 	}
 
 }
