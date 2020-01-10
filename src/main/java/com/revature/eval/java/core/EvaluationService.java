@@ -270,13 +270,37 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 * 
 	 */
-	// instanceOf to check, then do casting
+
 	static class BinarySearch<T> {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+			if (!(t instanceof Comparable)) {
+				throw new IllegalArgumentException("Can't compare");
+			}
+			@SuppressWarnings("unchecked")
+			List<Comparable> list = (List<Comparable>) sortedList;
+			Comparable item = (Comparable) t;
+
+			int l = 0;
+			int r = list.size() - 1;
+
+			while (l <= r) {
+
+				int c = (l + r) / 2;
+				int compareResult = item.compareTo(list.get(c));
+
+				if (compareResult == 0) {
+					return c;
+				}
+				if (compareResult < 0) {
+					r = c - 1;
+				} else {
+					l = c + 1;
+				}
+			}
+
+			return -1;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -357,28 +381,27 @@ public class EvaluationService {
 	 * @return
 	 */
 
-	
 	public boolean isArmstrongNumber(int num) {
 
-	    String number = String.valueOf(num);
-	    char[] numDigits = number.toCharArray();
+		String number = String.valueOf(num);
+		char[] numDigits = number.toCharArray();
 
-	    int sum = 0;
-	    // get no of digits
-	    int power = numDigits.length;
+		int sum = 0;
+		// get no of digits
+		int power = numDigits.length;
 
-	    for (int i = 0; i < numDigits.length; i++) {
-	        // character to digit
-	        int digit = Character.digit(numDigits[i], 10);
-	        // digit to power
-	        sum = sum + (int) Math.pow(digit, power);
-	    }
+		for (int i = 0; i < numDigits.length; i++) {
+			// character to digit
+			int digit = Character.digit(numDigits[i], 10);
+			// digit to power
+			sum = sum + (int) Math.pow(digit, power);
+		}
 
-	    if (sum == num) {
-	        return true;
-	    } else {
-	        return false;
-	    }
+		if (sum == num) {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 
@@ -526,9 +549,19 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+
+	public boolean isValidisbn(String string) {
+		int sum = 0;
+		for (int i = 0; i < 10; i++) {
+			if (i % 2 == 0)
+				sum += Integer.parseInt(Character.toString(string.charAt(i)));
+			else
+				sum += 3 * Integer.parseInt(Character.toString(string.charAt(i)));
+		}
+		if (sum % 10 == 0)
+			return true;
+		else
+			return false;
 	}
 
 	/**
@@ -620,7 +653,6 @@ public class EvaluationService {
 	 * @return
 	 */
 
-
 	/**
 	 * 20. Parse and evaluate simple math word problems returning the answer as an
 	 * integer.
@@ -648,6 +680,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	// split string at spaces into array
+	//
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
 		return 0;
