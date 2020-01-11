@@ -383,17 +383,25 @@ public class EvaluationService {
 	 */
 
 	static class BinarySearch<T> {
-		private List<T> sortedList;
+		private List<T> sortedList; 
+		// T is the generic type
+		
+		// Comparable is an interface used to compare two elements of the same type, and will return if one is greater, equal to, or less the other
 
 		public int indexOf(T t) {
+			// t is an instance of type Comparable
 			if (!(t instanceof Comparable)) {
+				
 				throw new IllegalArgumentException("Can't compare");
 			}
 
-			@SuppressWarnings("unchecked")
+			// @SuppressWarnings("unchecked")
 			List<Comparable> list = (List<Comparable>) sortedList;
+			// assigning the sorted list we 
+			// type casting the List<T> to a List<Comparable> so we can compare elements in the list 
 			Comparable item = (Comparable) t;
 
+			// regular binary search code
 			int l = 0;
 			int r = list.size() - 1;
 
