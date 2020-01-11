@@ -467,13 +467,14 @@ public class EvaluationService {
 	public String toPigLatin(String s) {
 		String output = "";
 
-		for (String word : s.split(" ")) {
+		// enhanced for loop to iterate words given in string
+		for (String word : s.split(" ")){
 			// the index of the first vowel is stored
 			if (output != "") {
 				output += " "; // add space
 			}
 			int len = word.length();
-			int index = -1; // havent seen a vowel
+			int index = -1; // initializing to -1 to see if vowel is present
 			for (int i = 0; i < len; i++) // searching for vowel in string
 			{
 				if (isVowel(word.charAt(i))) {
@@ -517,18 +518,19 @@ public class EvaluationService {
 
 	public boolean isArmstrongNumber(int num) {
 
-		String number = String.valueOf(num);
-		char[] numDigits = number.toCharArray();
+		String number = String.valueOf(num); // converting integer to String 
+		char[] numDigits = number.toCharArray(); // creating char array to store numbers as characters
 
 		int sum = 0;
-		// get no of digits
+		// get number of digits
 		int power = numDigits.length;
 
 		for (int i = 0; i < numDigits.length; i++) {
-			// character to digit
+			// converting character to digit base 10
 			int digit = Character.digit(numDigits[i], 10);
 			// digit to power
 			sum = sum + (int) Math.pow(digit, power);
+			// type casting double to int bc math.pow gives a double
 		}
 
 		if (sum == num) {
@@ -549,6 +551,7 @@ public class EvaluationService {
 	 * @param l
 	 * @return
 	 */
+	// prime factor is a prime number < the given number which divides the given number
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		List<Long> primeFactors = new ArrayList<>();
 		long n = l; // copy to a different variable as we will be modifying it
@@ -557,7 +560,13 @@ public class EvaluationService {
 		if (l == 2) {
 			primeFactors.add(2L);
 		}
-
+		
+		// have to also add 3 because
+		if (l == 3) {
+			primeFactors.add(3L);
+		}
+		
+		// math.sqrt returns the correctly rounded positive square root of a double value, auto typecasts
 		for (int i = 2; i <= Math.sqrt(l); i++) {
 			while (n % i == 0) {
 				primeFactors.add((long) i);
