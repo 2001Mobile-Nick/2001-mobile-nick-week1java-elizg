@@ -561,7 +561,7 @@ public class EvaluationService {
 			primeFactors.add(2L);
 		}
 		
-		// have to also add 3 because
+		// have to also add 3 because prime and sqrt
 		if (l == 3) {
 			primeFactors.add(3L);
 		}
@@ -615,6 +615,8 @@ public class EvaluationService {
 			for (Character c : string.toCharArray()) {
 				if (c >= 'a' && c <= 'z') {
 					output += (char) ('a' + ((c - 'a' + key) % 26));
+					// % 26 bc 26 is the base of the modulo--after 26 repeats all etc
+					// lowercase and uppercase have different ascii values
 				} else if (c >= 'A' && c <= 'Z') {
 					output += (char) ('A' + ((c - 'A' + key) % 26));
 				} else {
@@ -638,6 +640,7 @@ public class EvaluationService {
 	 * @param i
 	 * @return
 	 */
+	// TODO add comments
 	public int calculateNthPrime(int n) {
 		if (n <= 0) {
 			throw new IllegalArgumentException();
@@ -734,7 +737,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-
+	// TODO redo isValidisbn
 	public boolean isValidisbn(String string) {
 		int sum = 0;
 		for (int i = 0; i < 10; i++) {
@@ -766,15 +769,30 @@ public class EvaluationService {
 	// has a value so if you subtract the actual letter it gives you the
 	// position(index) in the alphabet
 
-	public boolean isPangram(String string) {
+	public boolean isPangram(String str) {
+		// occurrence is boolean array of size 26 (number of characters in the alphabet)
+		// a true indicates that we have seen that character
+		// occurrence[0] - true--we have seen 'a'
+		// occurrence[0] - false--we have not seen 'a'
 		boolean[] occurrence = new boolean[26];
+		// remove all characters except small and cap a-z
 		str = str.replaceAll("[^A-Za-z]", "");
+		// put all in new string
+		// declare new array c, go through, put each char in it
 		for (char c : str.toCharArray()) {
+			// ascii a = 97, b = 98, ... z = 122
+			// if char c is 'b', the index is 1
+			// occurrence[1] = true
 			occurrence[Character.toLowerCase(c) - 'a'] = true; // set to true
 		}
+		
+		// at the end of the loop, occurrence will have trues for all the characters you have see
 
 		for (boolean flag : occurrence) {
+			// flag is the loop variable getting all 26 values of occurence
+			// if condition needs to be evaluated to true, if flag is false, !flag will be true
 			if (!flag) {
+				// have not seen this character, so is not a pangram, so return false
 				return false;
 			}
 		}
@@ -807,16 +825,18 @@ public class EvaluationService {
 	 * @param set
 	 * @return
 	 */
-	public int getSumOfMultiples(int i, int[] set) {
-		Set<Integer> multiplies = new HashSet<>();
+	public int getSumOfMultiples(int n, int[] set) {
+		Set<Integer> multiples = new HashSet<>();
+		// created set of integers to a new hashset bc we want no duplicates
 		for (int multiplier : set) {
+			// adding to set all multiples which are less than the given number
 			for (int i = 1; i * multiplier < n; i++) {
-				multiplies.add(multiplier * i);
+				multiples.add(multiplier * i);
 			}
 		}
 
 		int sum = 0;
-		for (int i : multiplies) {
+		for (int i : multiples) {
 			sum += i;
 		}
 		return sum;
@@ -887,7 +907,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	// split string at spaces into array
-	//
+	// TODO add comments
 	public int solveWordProblem(String string) {
 		string = string.replaceAll("\\?", "");
 		String[] tokens = string.split(" ");
